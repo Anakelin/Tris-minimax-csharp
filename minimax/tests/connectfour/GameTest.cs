@@ -1,11 +1,11 @@
 using System;
-using Xunit;
+//using Xunit;
 using minimax.connectfour;
 
 namespace tests.connectfour
 {
     public class GameTest
-    {
+    {/*
         [Fact]
         public void Test1()
         {
@@ -21,5 +21,6 @@ namespace tests.connectfour
             Assert.True(game.HasWon(state, Player.Blue));
             Assert.False(game.HasWon(state, Player.Red));
         }
+        */
     }
 }
