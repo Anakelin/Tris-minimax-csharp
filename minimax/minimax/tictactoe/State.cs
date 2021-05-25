@@ -28,7 +28,6 @@ namespace minimax.tictactoe
             _currentPlayer = player;
         }
 
-<<<<<<< HEAD
         //Inizializazione casuale del campo
         public void RandomState()
         {
@@ -86,8 +85,6 @@ namespace minimax.tictactoe
         }
         
         //Get di tutti gli attributi
-=======
->>>>>>> parent of 8c5816f (Creazione Program.cs)
         public Player Get_currentPlayer()
         {
             return _currentPlayer;
