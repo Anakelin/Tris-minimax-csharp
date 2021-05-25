@@ -6,20 +6,20 @@ namespace minimax.tictactoe
 		public int row;
 		public int column;
 
-		public Action(int row, int column)
+		public Action(int r, int c)
 		{
-			this.row=row;
-			this.column=column;
+			this.row=r;
+			this.column=c;
 		}
 
-		public int row
+		public int Get_row()
 		{
-			get { return row; }
+			 return row; 
 		}
 	
-		public int column
+		public int Get_column()
 		{
-			get { return column; }
+			return column; 
 		}
 	}
 }
