@@ -8,26 +8,15 @@ public class GameTest
 	public const int EMPTY = -1;
 	public GameTest()
 	{
-		int[,] board = Inizialize();
+	
 		//int[,] board = RandInizialize();
 		/*
 		*/
 		
-		Player contestant = Player.Cross;
-		State situation = new State(board,(int)contestant);
+		//Player contestant = Player.Cross;
+		//State situation = new State(board,(int)contestant);
 	}
-	public int[,] Inizialize()
-    {
-		int[,] board = new int[COL,ROW];
-        for (int i = 0; i < ROW; i++)
-        {
-            for (int j = 0; j < COL; j++)
-            {
-                board[i, j] = EMPTY;
-            }
-        }
-		return board;
-    }
+	
 	/*
 	public int[,] RandInizialize()
     {

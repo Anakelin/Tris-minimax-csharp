@@ -1,8 +1,11 @@
 ﻿using System;
-
-public class Action
+namespace minimax.tictactoe
 {
-	public Action()
+	public class Action
 	{
+		public Action()
+		{
+		}
 	}
 }
+	
