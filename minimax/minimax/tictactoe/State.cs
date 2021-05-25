@@ -26,6 +26,20 @@ namespace minimax.tictactoe
             _currentPlayer = player;
         }
 
+        public void RandomState()
+        {
+            int num;
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    Random rand = new Random();
+                    num = rand.Next(-1, 2);
+                    _board[row, col] = num;
+                }
+            }
+        }
+
         public Player Get_currentPlayer()
         {
             return _currentPlayer;
