@@ -24,7 +24,8 @@ namespace minimax.tictactoe
         }
             public State GetInitialState()  
         {
-            throw new NotImplementedException();
+            State stato = new State();
+            return stato();
         } 
             public Player GetPlayer(State state)
         {
