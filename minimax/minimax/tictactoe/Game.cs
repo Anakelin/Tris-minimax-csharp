@@ -37,7 +37,10 @@ namespace minimax.tictactoe
         }
             public State GetResult(State state, Action action)
         {
-            throw new NotImplementedException();
+            int[,] board = state.Get_board();
+            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
+            State newState = new State(board,state.Get_currentPlayer());
+            return newState;
         }
             public double GetUtility(State state,Player player)
         {
