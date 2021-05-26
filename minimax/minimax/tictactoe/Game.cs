@@ -50,6 +50,17 @@ namespace minimax.tictactoe
         public bool IsTerminal(State state)
         {
             throw new NotImplementedException();
+            int[,] board = state.Get_board();
+            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
+
+            //righe
+            for (int i = 0; i < length; i++)
+			{
+                if ()
+	            {
+                    
+	            }
+			}
         }
     }
 }
