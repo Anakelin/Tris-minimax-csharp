@@ -54,8 +54,42 @@ namespace minimax.tictactoe
             Console.WriteLine(player1);
             */
 
+            /*
+            // Test IsVictory Ok
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            stato.RandomState();
+            int victory = g.IsVictory(stato);
+            stato.PrintBoard();
+            Console.WriteLine(victory);
+            */
 
+            /*
+            // Test NearVictory2 Ok
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            stato.RandomState();
+            stato.PrintBoard();
+            Console.WriteLine(g.NearVictory2(stato.Get_board()));
+            */
 
+            /*
+            // Test IsNearVictory Ok
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            stato.RandomState();
+            stato.PrintBoard();
+            Console.WriteLine(g.IsNearVictory(stato));
+            */
+
+            /*
+            // Test Getutility
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            stato.RandomState();
+            stato.PrintBoard();
+            Console.WriteLine(g.GetUtility(stato,stato.Get_currentPlayer()));
+            */
         }
     }
 }
