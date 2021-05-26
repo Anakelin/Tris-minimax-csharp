@@ -8,8 +8,43 @@ namespace minimax.tictactoe
 {
     public class Program
     {
+        
         static void Main(string[] args)
         {
+
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            bool matchInProgress = true;
+            int currentPlayer = g.FirstPlayer();
+            
+            do
+            {
+                stato.PrintBoard();
+
+                if (currentPlayer == 0)
+                {
+                    //IA
+
+
+
+
+                    currentPlayer = 1;
+                }
+                else
+                {
+
+
+
+
+                    currentPlayer = 0;
+                }
+
+
+                matchInProgress = g.IsTerminal(stato);
+            } while (matchInProgress);
+
+
+
             /*
             // Test printBoard Ok
             State stato = new State();
@@ -92,7 +127,7 @@ namespace minimax.tictactoe
            */
 
             /*
-            //Test IsTerminal No
+            //Test IsTerminal Ok
             Game g = new Game();
             State stato = g.GetInitialState();
             stato.RandomState();
@@ -101,8 +136,8 @@ namespace minimax.tictactoe
             */
 
 
-
-
+            Console.WriteLine("END");
+            Console.ReadKey();
         }
     }
 }

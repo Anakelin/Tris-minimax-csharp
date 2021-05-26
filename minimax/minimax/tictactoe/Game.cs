@@ -22,7 +22,24 @@ namespace minimax.tictactoe
             }
             return legalMoves;
         }
-            
+       
+        public int FirstPlayer()
+        {
+            bool loop = true;
+            Console.WriteLine("Chi inizia per primo?");
+            do
+            {
+                Console.WriteLine("0 - IA || 1 - Player");
+                int scelta = ReturnInt();
+                switch (scelta)
+                {
+                    case 0: return 0; 
+                    case 1: return 1;
+                    default: Console.Write("ERRORE: Dovresti inserire "); break;
+                }
+            } while (loop);
+            return -1;
+        }
         public State GetInitialState()  
         {
             State stato = new State();
@@ -192,5 +209,25 @@ namespace minimax.tictactoe
             }
             return -1;
         }
+
+        public int ReturnInt()
+        {
+            int n = -1;
+            bool loop;
+            do
+            {
+                loop = false;
+                try
+                {
+                    n = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    loop = true;
+                    Console.WriteLine("ERRORE: Il numero deve essere intero!");
+                }
+            } while (loop);
+            return n;
+        }    
     }
 }
