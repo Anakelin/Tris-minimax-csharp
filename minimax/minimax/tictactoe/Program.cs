@@ -19,6 +19,7 @@ namespace minimax.tictactoe
 
             /*
             // Test GetActions Ok
+            State stato = new State();
             Game g = new Game();
             List<Action> legalMoves = g.GetActions(stato);
             foreach (Action move in legalMoves)
@@ -31,9 +32,30 @@ namespace minimax.tictactoe
             // Test GetResult Ok
             Game g = new Game();
             State stato = new State();
-            State newState = g.GetResult(stato,new Action(1,1));
+            State newState = g.GetResult(stato,new Action(2,2));
             newState.PrintBoard();
             */
+
+
+            /*
+            //test getInitialState ok
+            State stato;
+            Game g = new Game();
+            stato = g.GetInitialState();
+            stato.PrintBoard();
+            */
+
+            /*
+            //test getPlayer ok
+            State stato = new State();
+            Game g = new Game();
+            Player player1;
+            player1 = g.GetPlayer(stato);
+            Console.WriteLine(player1);
+            */
+
+
+
         }
     }
 }

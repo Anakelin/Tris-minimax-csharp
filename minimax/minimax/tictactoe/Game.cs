@@ -25,11 +25,12 @@ namespace minimax.tictactoe
             public State GetInitialState()  
         {
             State stato = new State();
-            return stato();
+            return stato;
         } 
             public Player GetPlayer(State state)
         {
-            throw new NotImplementedException();
+            Player currentPlayer = state.Get_currentPlayer();
+            return currentPlayer;
         }
             public Player[] GetPlayers()
         {
