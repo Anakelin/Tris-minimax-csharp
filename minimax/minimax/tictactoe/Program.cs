@@ -85,11 +85,17 @@ namespace minimax.tictactoe
             /*
             // Test Getutility Ok
             Game g = new Game();
-            State stato = g.GetInitialState();
-            stato.RandomState();
+            //State stato = g.GetInitialState();
+            //stato.RandomState();
+            int[,] board = new int[,] {
+                {0,-1,-1 },
+                {-1,0,-1 },
+                {-1,-1,-1 } 
+            };
+            State stato = new State(board,0);
             stato.PrintBoard();
             Console.WriteLine(g.GetUtility(stato,stato.Get_currentPlayer()));
-           */
+            */
 
             /*
             //Test IsTerminal No
@@ -100,6 +106,7 @@ namespace minimax.tictactoe
             Console.WriteLine(g.IsTerminal(stato));
             */
 
+            
 
 
 
