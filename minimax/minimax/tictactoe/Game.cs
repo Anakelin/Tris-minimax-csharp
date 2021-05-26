@@ -80,7 +80,6 @@ namespace minimax.tictactoe
         public bool IsTerminal(State state)
         {
             int[,] board = state.Get_board();
-            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
 
             int isWin = IsVictory(state);
 
@@ -169,22 +168,22 @@ namespace minimax.tictactoe
             {
                 for (int row = 0; row < 3; row++)
                 {
-                    bool rowComb0 = board[row, 0] == (int)player && board[row, 1] == (int)player;
-                    bool rowComb1 = board[row, 0] == (int)player && board[row, 2] == (int)player;
-                    bool rowComb2 = board[row, 1] == (int)player && board[row, 2] == (int)player;
+                    bool rowComb0 = board[row, 0] == (int)player && board[row, 1] == (int)player && board[row, 2] == -1;
+                    bool rowComb1 = board[row, 0] == (int)player && board[row, 2] == (int)player && board[row, 1] == -1;
+                    bool rowComb2 = board[row, 1] == (int)player && board[row, 2] == (int)player && board[row,0]== -1;
                     rowComb = rowComb0 || rowComb1 || rowComb2 || rowComb;
                 }
 
                 for (int col = 0; col < 3; col++)
                 {
-                    bool colComb0 = board[0, col] == (int)player && board[1, col] == (int)player;
-                    bool colComb1 = board[0, col] == (int)player && board[2, col] == (int)player;
-                    bool colComb2 = board[1, col] == (int)player && board[2, col] == (int)player;
+                    bool colComb0 = board[0, col] == (int)player && board[1, col] == (int)player && board[2, col] == -1;
+                    bool colComb1 = board[0, col] == (int)player && board[2, col] == (int)player && board[1, col] == -1;
+                    bool colComb2 = board[1, col] == (int)player && board[2, col] == (int)player && board[0, col] == -1;
                     colComb = colComb0 || colComb1 || colComb2 || colComb;
                 }
 
-                bool diaComb = (board[0, 0] == (int)player && board[1, 1] == (int)player) || ((board[0, 0] == (int)player && board[2, 2] == (int)player) || board[1, 1] == (int)player && board[2, 2] == (int)player);
-                bool diaCombR = (board[0, 2] == (int)player && board[1, 1] == (int)player) || ((board[0, 2] == (int)player && board[2, 0] == (int)player) || board[1, 1] == (int)player && board[2, 0] == (int)player);
+                bool diaComb = (board[0, 0] == (int)player && board[1, 1] == (int)player && board[2, 2] == -1) || (board[0, 0] == (int)player && board[2, 2] == (int)player && board[1, 1] == -1) || (board[1, 1] == (int)player && board[2, 2] == (int)player && board[0, 0] == -1);
+                bool diaCombR = (board[0, 2] == (int)player && board[1, 1] == (int)player && board[2, 0] == -1) || (board[0, 2] == (int)player && board[2, 0] == (int)player && board[1, 1] == -1) || (board[1, 1] == (int)player && board[2, 0] == (int)player && board[0, 2] == -1);
 
                 if (rowComb || colComb || diaComb || diaCombR)
                 {

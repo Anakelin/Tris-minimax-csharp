@@ -83,13 +83,26 @@ namespace minimax.tictactoe
             */
 
             /*
-            // Test Getutility
+            // Test Getutility Ok
             Game g = new Game();
             State stato = g.GetInitialState();
             stato.RandomState();
             stato.PrintBoard();
             Console.WriteLine(g.GetUtility(stato,stato.Get_currentPlayer()));
+           */
+
+            /*
+            //Test IsTerminal No
+            Game g = new Game();
+            State stato = g.GetInitialState();
+            stato.RandomState();
+            stato.PrintBoard();
+            Console.WriteLine(g.IsTerminal(stato));
             */
+
+
+
+
         }
     }
 }
