@@ -22,28 +22,34 @@ namespace minimax.tictactoe
             }
             return legalMoves;
         }
-            public State GetInitialState()  
+            
+        public State GetInitialState()  
         {
             State stato = new State();
             return stato;
         } 
-            public Player GetPlayer(State state)
+          
+        public Player GetPlayer(State state)
         {
             Player currentPlayer = state.Get_currentPlayer();
             return currentPlayer;
         }
-            public Player[] GetPlayers()
+          
+        public Player[] GetPlayers()
         {
-            throw new NotImplementedException();
+            Player[] bothPlayers = new Player[] {Player.Cross,Player.Circle};
+            return bothPlayers;
         }
-            public State GetResult(State state, Action action)
+        
+        public State GetResult(State state, Action action)
         {
             int[,] board = state.Get_board();
             board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
             State newState = new State(board,state.Get_currentPlayer());
             return newState;
         }
-            public double GetUtility(State state,Player player)
+        
+        public double GetUtility(State state,Player player)
         {
             int winner;
             if (IsTerminal(state))
@@ -70,27 +76,37 @@ namespace minimax.tictactoe
                 return IsNearVictory(state);
             }
         }
+     
         public bool IsTerminal(State state)
         {
-            throw new NotImplementedException();
             int[,] board = state.Get_board();
             board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
 
-            //righe
-            for (int i = 0; i < length; i++)
-			{
-                if ()
-	            {
-                    
-	            }
-			}
+            int isWin = IsVictory(state);
+
+            if (isWin !=-1)
+            {
+              return true;
+            }
+            else
+            {
+                for (int row = 0; row < 3; row++)
+		    	{
+                     for (int col = 0; col < 3; col++)
+		             {
+                          if (board[row,col] == -1)
+	                      {
+                                 return false;
+	                      }
+		             }
+		    	}
+            }
+             return true;
         }
         
         public int IsVictory(State state)
         {
-            //getplayers ancora non implementato se implementato togliere la riga sotto getPlayers
-            //Player[] players = GetPlayers(); 
-            Player[] players = new Player[] { Player.Cross, Player.Circle };
+            Player[] players = GetPlayers(); 
             foreach (Player player in players)
             {
                 int[,] board = state.Get_board();
@@ -120,6 +136,7 @@ namespace minimax.tictactoe
             
             return -1;
         }
+
         public double IsNearVictory(State state)
         {
             int[,] board = state.Get_board();
@@ -147,7 +164,7 @@ namespace minimax.tictactoe
         {
             bool rowComb = false;
             bool colComb = false;
-            Player[] players = new Player[] { Player.Cross, Player.Circle };
+            Player[] players = GetPlayers();
             foreach (Player player in players)
             {
                 for (int row = 0; row < 3; row++)
