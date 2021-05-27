@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using minimax.tictactoe;
 using minimax;
+using minimax.core.adversarial;
 
 
 namespace minimax.tictactoe
@@ -14,9 +15,25 @@ namespace minimax.tictactoe
         {
 
             Game g = new Game();
+            /*
+            int[,] board = new int[,] {
+            {-1,-1,-1 },
+            {-1,1,-1 },
+            {-1,-1,-1 }
+            };
+            */
             State stato = g.GetInitialState();
+            int[,] board = stato.Get_board();
+            int turnPlayer = (int)stato.Get_currentPlayer();
+            //State stato = new State(board,Player.Cross);
             bool matchInProgress = true;
             int currentPlayer = g.FirstPlayer();
+<<<<<<< HEAD
+=======
+            AdversarialSearch<State, Action> adversarialSearch;
+            
+
+>>>>>>> 2c3fc0e8df832312015c6815b19e131f29faa7b6
             do
             {
                 turno++
@@ -26,25 +43,30 @@ namespace minimax.tictactoe
                 if (currentPlayer == 0)
                 {
                     //IA
-
-
-
-
+                    adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
+                    Action move = adversarialSearch.makeDecision(stato.DeepCopy());
+                    g.GetResult(stato,move);
+                    
                     currentPlayer = 1;
                 }
                 else
                 {
+<<<<<<< HEAD
                     //User
 
+=======
+                    Console.ReadKey();
+>>>>>>> 2c3fc0e8df832312015c6815b19e131f29faa7b6
 
 
                     currentPlayer = 0;
                 }
 
 
-                matchInProgress = g.IsTerminal(stato);
+                matchInProgress = !(g.IsTerminal(stato)); //Se non è terminale deve continuare
+                Console.WriteLine(matchInProgress);
             } while (matchInProgress);
-
+            stato.PrintBoard();
 
 
             /*
@@ -143,7 +165,7 @@ namespace minimax.tictactoe
             Console.WriteLine(g.IsTerminal(stato));
             */
 
-            
+
 
             Console.WriteLine("END");
             Console.ReadKey();
