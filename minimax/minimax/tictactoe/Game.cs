@@ -90,28 +90,7 @@ namespace minimax.tictactoe
             }
             else
             {
-                if(IsNearVictory(state) != 0)
-                {
-                    return IsNearVictory(state);
-                }
-                else
-                {
-                    int[,] board = state.Get_board();
-                    int currentPlayer = (int)state.Get_currentPlayer();
-                    
-                    //Se è Giocatore 1
-                    if (board[0,0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
-                    {
-                        return 0.5;
-                    }
-                    //Se è Giocatore 2
-                    else if (board[1, 1] == currentPlayer)
-                    {
-                        return 0.75;
-                    }
-                    return 0;
-                }
-                
+                return IsNearVictory(state);
             }
         }
      
