@@ -8,7 +8,8 @@ namespace minimax.tictactoe
 {
     public class Program
     {
-        
+        public int turno = 0;
+
         static void Main(string[] args)
         {
 
@@ -16,9 +17,10 @@ namespace minimax.tictactoe
             State stato = g.GetInitialState();
             bool matchInProgress = true;
             int currentPlayer = g.FirstPlayer();
-            
             do
             {
+                turno++
+                Console.WriteLine("{0}° Turno",turno)
                 stato.PrintBoard();
 
                 if (currentPlayer == 0)
@@ -32,7 +34,7 @@ namespace minimax.tictactoe
                 }
                 else
                 {
-
+                    //User
 
 
 

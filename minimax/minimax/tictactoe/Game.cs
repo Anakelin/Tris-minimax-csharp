@@ -123,10 +123,28 @@ namespace minimax.tictactoe
 
             if (isWin !=-1)
             {
-              return true;
+                if (isWin == 0)
+               	{
+                    Console.WriteLine("X Vince!");
+            	}
+                else
+	            {
+                    Console.WriteLine("O Vince!");
+	            }
+                return true;
             }
             else
             {
+                if (Program.turno >= 9)
+                {
+                    return true;
+                }
+                else
+	            {
+                    return false;
+	            }
+	
+                /*
                 for (int row = 0; row < 3; row++)
 		    	{
                      for (int col = 0; col < 3; col++)
@@ -137,6 +155,7 @@ namespace minimax.tictactoe
 	                      }
 		             }
 		    	}
+                */
             }
              return true;
         }
