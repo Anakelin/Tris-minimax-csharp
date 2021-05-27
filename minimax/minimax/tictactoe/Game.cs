@@ -57,15 +57,26 @@ namespace minimax.tictactoe
             Player[] bothPlayers = new Player[] {Player.Cross,Player.Circle};
             return bothPlayers;
         }
-        
+
         public State GetResult(State state, Action action)
         {
             int[,] board = state.Get_board();
-            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
-            State newState = new State(board,state.Get_currentPlayer());
+            board[action.Get_row(), action.Get_column()] = (int)GetPlayer(state);
+
+            State newState;
+            if (GetPlayer(state) == Player.Cross)
+            {
+                newState = new State(board, Player.Circle);
+            }
+            else
+            {
+                newState = new State(board, Player.Cross);
+            }
+
             return newState;
         }
-        
+
+
         public double GetUtility(State state,Player player)
         {
             int winner;
@@ -90,7 +101,7 @@ namespace minimax.tictactoe
             }
             else
             {
-                if(IsNearVictory(state) != 0)
+                if (IsNearVictory(state) != 0)
                 {
                     return IsNearVictory(state);
                 }
@@ -102,7 +113,7 @@ namespace minimax.tictactoe
                     //Prima mossa
                     if (currentPlayer == (int)Player.Cross)
                     {
-                        //Se � Giocatore 1
+                        //Se è Giocatore 1
                         if (board[0, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
                         {
                             return 0.5;
@@ -110,17 +121,17 @@ namespace minimax.tictactoe
                     }
                     else
                     {
-                        //Se � Giocatore 2
+                        //Se è Giocatore 2
 
-                         if (board[1, 1] == currentPlayer)
-                            {
-                                return 0.75;
-                            }
+                        if (board[1, 1] == currentPlayer)
+                        {
+                            return 0.75;
+                        }
                     }
 
                     return 0;
                 }
-                
+
             }
         }
      
@@ -146,7 +157,6 @@ namespace minimax.tictactoe
 	                      }
 		             }
 		    	}
-                */
             }
              return true;
         }
