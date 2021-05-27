@@ -61,15 +61,15 @@ namespace minimax.tictactoe
         public State GetResult(State state, Action action)
         {
             int[,] board = state.Get_board();
-            board[action.Get_row(), action.Get_column()] = (int)GetPlayer(state);
 
+            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
             State newState;
             if (GetPlayer(state) == Player.Cross)
             {
                 newState = new State(board, Player.Circle);
             }
             else
-            {
+            {   
                 newState = new State(board, Player.Cross);
             }
 
