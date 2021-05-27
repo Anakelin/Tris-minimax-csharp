@@ -61,8 +61,18 @@ namespace minimax.tictactoe
         public State GetResult(State state, Action action)
         {
             int[,] board = state.Get_board();
-            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
-            State newState = new State(board,state.Get_currentPlayer());
+            board[action.Get_row(), action.Get_column()] = (int)GetPlayer(state);
+
+            State newState;
+            if (GetPlayer(state) == Player.Cross)
+            {
+                newState = new State(board, Player.Circle);
+            }
+            else
+            {
+                newState = new State(board, Player.Cross);
+            }
+            
             return newState;
         }
         
@@ -98,17 +108,26 @@ namespace minimax.tictactoe
                 {
                     int[,] board = state.Get_board();
                     int currentPlayer = (int)state.Get_currentPlayer();
-                    
-                    //Se è Giocatore 1
-                    if (board[0,0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
+
+                    //Prima mossa
+                    if (currentPlayer == (int)Player.Cross)
                     {
-                        return 0.5;
+                        //Se è Giocatore 1
+                        if (board[0, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
+                        {
+                            return 0.5;
+                        }
                     }
-                    //Se è Giocatore 2
-                    else if (board[1, 1] == currentPlayer)
+                    else
                     {
-                        return 0.75;
+                        //Se è Giocatore 2
+
+                         if (board[1, 1] == currentPlayer)
+                            {
+                                return 0.75;
+                            }
                     }
+
                     return 0;
                 }
                 
