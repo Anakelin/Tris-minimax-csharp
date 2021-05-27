@@ -29,14 +29,17 @@ namespace minimax.tictactoe
             bool matchInProgress = true;
             int currentPlayer = g.FirstPlayer();
             AdversarialSearch<State, Action> adversarialSearch;
-
+            int nTurno = 0;
 
             do
             {
+                nTurno++;
                 stato.PrintBoard();
-
+                
                 if (currentPlayer == 0)
                 {
+                    Console.Write("\n{0}° Turno, tocca all'IA. ",nTurno);
+                    Console.ReadKey();
                     //IA
                     adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
                     Action move = adversarialSearch.makeDecision(stato.DeepCopy());
@@ -46,18 +49,63 @@ namespace minimax.tictactoe
                 }
                 else
                 {
-                    Console.ReadKey();
+                    Console.Write("\n{0}° Turno, tocca a te! ", nTurno);
+                    int row, col;
+                    bool emptyCell;
+                    Action mossaCorrente;
+                    do
+	                {   
+                        emptyCell=false;
+                        List<Action> legalMoves = new List<Action>();
+                        Console.Write("\nInserire riga (0-1-2): ");
+                        do
+                        {
+                            row = g.ReturnInt();
+                            if (row < 0 || row > 2)
+                            {
+                                Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): ");
+                            }
+	                    } while (row < 0 || row > 2);
+                    
+                        Console.Write("\nInserire colonna (0-1-2): ");
+                        do
+	                    {
+                            col = g.ReturnInt();
+                            if (col < 0 || col > 2)
+                            {
+                                Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): ");
+                            }
+                        } while (col < 0 || col > 2);
 
+                        mossaCorrente = new Action(row,col);
+                        legalMoves = g.GetActions(stato);
+                        
+                        foreach (Action mossaLegale in legalMoves)
+	                    {
+                            if (mossaCorrente.Get_row() == mossaLegale.Get_row() && mossaCorrente.Get_column() == mossaLegale.Get_column())
+                            {
+                                emptyCell=true;
+	                        }
+	                    }
 
+                        if (emptyCell==false)
+                        {
+                            Console.Write("\nERRORE: La cella selezionata e occupata! ");
+                        }
+
+                    } while (emptyCell==false);
+
+                    stato = g.GetResult(stato, mossaCorrente);
                     currentPlayer = 0;
                 }
 
 
                 matchInProgress = !(g.IsTerminal(stato)); //Se non è terminale deve continuare
-                Console.WriteLine(matchInProgress);
+                //Console.WriteLine(matchInProgress);
             } while (matchInProgress);
             stato.PrintBoard();
-
+            Console.WriteLine("\n\nEND");
+            Console.ReadKey();
 
 
             /*
@@ -150,10 +198,6 @@ namespace minimax.tictactoe
             Console.WriteLine(g.IsTerminal(stato));
             */
 
-
-
-            Console.WriteLine("END");
-            Console.ReadKey();
         }
     }
 }

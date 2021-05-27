@@ -141,22 +141,22 @@ namespace minimax.tictactoe
 
             int isWin = IsVictory(state);
 
-            if (isWin !=-1)
+            if (isWin != -1)
             {
-              return true;
+                return true;
             }
             else
             {
                 for (int row = 0; row < 3; row++)
-		    	{
-                     for (int col = 0; col < 3; col++)
-		             {
-                          if (board[row,col] == -1)
-	                      {
-                                 return false;
-	                      }
-		             }
-		    	}
+                {
+                    for (int col = 0; col < 3; col++)
+                    {
+                        if (board[row, col] == -1)
+                        {
+                            return false;
+                        }
+                    }
+                }
             }
              return true;
         }

@@ -63,7 +63,7 @@ namespace minimax.tictactoe
                 }
 
             }
-
+            Console.WriteLine("");
             Console.WriteLine("╔═════════╦═════════╦═════════╗");
             Console.WriteLine("║         ║         ║         ║");
             Console.WriteLine($"║    {campovisto[0, 0]}    ║    {campovisto[0, 1]}    ║    {campovisto[0, 2]}    ║");
@@ -77,7 +77,6 @@ namespace minimax.tictactoe
             Console.WriteLine($"║    {campovisto[2, 0]}    ║    {campovisto[2, 1]}    ║    {campovisto[2, 2]}    ║");
             Console.WriteLine("║         ║         ║         ║");
             Console.WriteLine("╚═════════╩═════════╩═════════╝");
-            Console.ReadKey();
         }
 
         public State DeepCopy()
