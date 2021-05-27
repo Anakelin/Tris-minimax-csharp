@@ -80,21 +80,6 @@ namespace minimax.tictactoe
             Console.ReadKey();
         }
 
-        public State DeepCopy()
-        {
-            State state = (State)this.MemberwiseClone();
-            state._board = new int[3, 3];
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    state._board[row, col] = _board[row, col];
-                }
-            }
-            state._currentPlayer = _currentPlayer;
-            return state;
-        }
-
         public Player Get_currentPlayer()
         {
             return _currentPlayer;
