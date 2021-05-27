@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using minimax.core.adversarial;
 
@@ -90,7 +90,37 @@ namespace minimax.tictactoe
             }
             else
             {
-                return IsNearVictory(state);
+                if(IsNearVictory(state) != 0)
+                {
+                    return IsNearVictory(state);
+                }
+                else
+                {
+                    int[,] board = state.Get_board();
+                    int currentPlayer = (int)state.Get_currentPlayer();
+
+                    //Prima mossa
+                    if (currentPlayer == (int)Player.Cross)
+                    {
+                        //Se � Giocatore 1
+                        if (board[0, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
+                        {
+                            return 0.5;
+                        }
+                    }
+                    else
+                    {
+                        //Se � Giocatore 2
+
+                         if (board[1, 1] == currentPlayer)
+                            {
+                                return 0.75;
+                            }
+                    }
+
+                    return 0;
+                }
+                
             }
         }
      
@@ -102,28 +132,10 @@ namespace minimax.tictactoe
 
             if (isWin !=-1)
             {
-                if (isWin == 0)
-               	{
-                    Console.WriteLine("X Vince!");
-            	}
-                else
-	            {
-                    Console.WriteLine("O Vince!");
-	            }
-                return true;
+              return true;
             }
             else
             {
-                if (Program.turno >= 9)
-                {
-                    return true;
-                }
-                else
-	            {
-                    return false;
-	            }
-	
-                /*
                 for (int row = 0; row < 3; row++)
 		    	{
                      for (int col = 0; col < 3; col++)

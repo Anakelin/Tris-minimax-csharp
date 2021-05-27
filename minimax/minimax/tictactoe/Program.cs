@@ -17,20 +17,11 @@ namespace minimax.tictactoe
             State stato = g.GetInitialState();
             bool matchInProgress = true;
             int currentPlayer = g.FirstPlayer();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            AdversarialSearch<State, Action> adversarialSearch;
             
 
->>>>>>> 2c3fc0e8df832312015c6815b19e131f29faa7b6
-=======
-            
->>>>>>> parent of 2c3fc0e (Implementato l'Ai)
             do
             {
-                turno++
-                Console.WriteLine("{0}° Turno",turno)
+                
                 stato.PrintBoard();
 
                 if (currentPlayer == 0)
@@ -44,14 +35,7 @@ namespace minimax.tictactoe
                 }
                 else
                 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    //User
-
-=======
                     Console.ReadKey();
->>>>>>> 2c3fc0e8df832312015c6815b19e131f29faa7b6
-=======
 
 
 >>>>>>> parent of 2c3fc0e (Implementato l'Ai)
@@ -155,6 +139,7 @@ namespace minimax.tictactoe
             stato.PrintBoard();
             Console.WriteLine(g.IsTerminal(stato));
             */
+
 
 
             Console.WriteLine("END");
