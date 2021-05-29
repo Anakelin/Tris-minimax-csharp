@@ -20,6 +20,18 @@ namespace minimax.tictactoe
                     }
                 }
             }
+            /*
+            Random rng = new Random();
+            int n = legalMoves.Count;
+            while (n>1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Action tmp = legalMoves[k];
+                legalMoves[k] = legalMoves[n];
+                legalMoves[n] = tmp;
+            }
+            */
             return legalMoves;
         }
        
@@ -60,19 +72,20 @@ namespace minimax.tictactoe
 
         public State GetResult(State state, Action action)
         {
-            int[,] board = state.Get_board();
+            State newState = new State();
 
-            board[action.Get_row(), action.Get_column()] = (int)state.Get_currentPlayer();
-            State newState;
-            if (GetPlayer(state) == Player.Cross)
+            newState.Set_board((int[,])state.Get_board().Clone());
+            newState.Set_currentPlayer(state.Get_currentPlayer());
+            newState.Get_board()[action.Get_row(), action.Get_column()] = (int)newState.Get_currentPlayer();
+
+            if (GetPlayer(newState) == Player.Cross)
             {
-                newState = new State(board, Player.Circle);
+                newState.Set_currentPlayer(Player.Circle);
             }
             else
-            {   
-                newState = new State(board, Player.Cross);
+            {
+                newState.Set_currentPlayer(Player.Cross);
             }
-
             return newState;
         }
 
@@ -87,11 +100,11 @@ namespace minimax.tictactoe
                 {
                     if (winner == (int)player)
                     {
-                        return double.PositiveInfinity - 1;
+                        return 20;
                     }
                     else
                     {
-                        return double.NegativeInfinity + 1;
+                        return -20;
                     }
                 }
                 else
@@ -99,6 +112,7 @@ namespace minimax.tictactoe
                     return 0;
                 }
             }
+            /*
             else
             {
                 if (IsNearVictory(state) != 0)
@@ -114,7 +128,7 @@ namespace minimax.tictactoe
                     if (currentPlayer == (int)Player.Cross)
                     {
                         //Se è Giocatore 1
-                        if (board[0, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
+                        if (board[0, 0] == currentPlayer || board[0, 2] == currentPlayer || board[2, 0] == currentPlayer || board[2, 2] == currentPlayer)
                         {
                             return 0.5;
                         }
@@ -129,10 +143,11 @@ namespace minimax.tictactoe
                         }
                     }
 
-                    return 0;
+                    
                 }
-
             }
+            */
+            return 0;
         }
      
         public bool IsTerminal(State state)
@@ -171,6 +186,7 @@ namespace minimax.tictactoe
                 {
                     if (board[row,0] == (int)player && board[row,1] == (int)player && board[row,2] == (int)player)
                     {
+                        
                         return (int)player;
                     }
                 }
@@ -178,15 +194,18 @@ namespace minimax.tictactoe
                 {
                     if (board[0,col] == (int)player && board[1,col] == (int)player && board[2,col] == (int)player)
                     {
+                        
                         return (int)player;
                     }
                 }
                 if (board[0,0] == (int)player && board[1,1] == (int)player && board[2,2] == (int)player)
                 {
+                    
                     return (int)player;
                 }
                 if (board[0,2] == (int)player && board[1,1] == (int)player && board[2,0] == (int)player)
                 {
+                    
                     return (int)player;
                 }
             }

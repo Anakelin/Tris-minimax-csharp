@@ -42,9 +42,8 @@ namespace minimax.tictactoe
                     Console.ReadKey();
                     //IA
                     adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
-                    Action move = adversarialSearch.makeDecision(stato.DeepCopy());
+                    Action move = adversarialSearch.makeDecision(stato);
                     stato = g.GetResult(stato, move);
-
                     currentPlayer = 1;
                 }
                 else

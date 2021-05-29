@@ -79,20 +79,6 @@ namespace minimax.tictactoe
             Console.WriteLine("╚═════════╩═════════╩═════════╝");
         }
 
-        public State DeepCopy()
-        {
-            State state = (State)this.MemberwiseClone();
-            state._board = new int[3, 3];
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    state._board[row, col] = _board[row, col];
-                }
-            }
-            state._currentPlayer = _currentPlayer;
-            return state;
-        }
 
         public Player Get_currentPlayer()
         {
@@ -108,7 +94,17 @@ namespace minimax.tictactoe
         {
             return _board[row,col];
         }
-        
+
+        public void Set_board(int[,] board)
+        {
+            _board = board;
+        }
+
+        public void Set_currentPlayer(Player player)
+        {
+            _currentPlayer = player;
+        }
+
     }
 
 }
