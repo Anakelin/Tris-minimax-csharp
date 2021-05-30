@@ -13,8 +13,6 @@ namespace minimax.tictactoe
 
         static void Main(string[] args)
         {
-
-            Game g = new Game();
             /*
             int[,] board = new int[,] {
             {-1,-1,-1 },
@@ -22,87 +20,113 @@ namespace minimax.tictactoe
             {-1,-1,-1 }
             };
             */
+            Game g = new Game();
             State stato = g.GetInitialState();
             int[,] board = stato.Get_board();
             int turnPlayer = (int)stato.Get_currentPlayer();
             //State stato = new State(board,Player.Cross);
             bool matchInProgress = true;
-            int currentPlayer = g.FirstPlayer();
+
+            int howManyPlayers = g.HowManyPlayers();
+            bool P1isIA = true;
+            bool P2isIA = true;
+            switch (howManyPlayers)
+            {
+                case 0: break;
+                case 1: int FirstPlayer = g.FirstPlayer();
+                    if (FirstPlayer==0)
+                    {
+                        P2isIA = false;
+                    }
+                    else
+                    {
+                        P1isIA = false;
+                    }
+                    break;
+                case 2: P1isIA = false; P2isIA = false; break;
+                default: Console.ForegroundColor = ConsoleColor.DarkGray; Console.WriteLine("ERRORE SOVRANNATURALE: Nessuna casistica dovrebbe portarti qui... se viene dato questo messaggio non ci possiamo + fidare di C#"); break;
+            }
+            
             AdversarialSearch<State, Action> adversarialSearch;
             int nTurno = 0;
+            bool player1Turn = true;
 
             do
             {
                 nTurno++;
                 stato.PrintBoard();
-                
-                if (currentPlayer == 0)
+
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                if (player1Turn)
                 {
-                    Console.Write("\n{0}° Turno, tocca all'IA. ",nTurno);
-                    Console.ReadKey();
-                    //IA
-                    adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
-                    Action move = adversarialSearch.makeDecision(stato);
-                    stato = g.GetResult(stato, move);
-                    currentPlayer = 1;
+                    Console.Write("\n{0}° Turno, tocca al 1° ",nTurno);
+                    if (P1isIA)
+                    {
+                        stato = g.PlayIA(out adversarialSearch, stato, g);
+                    }
+                    else
+                    {
+                        stato = g.PlayUser(stato);
+                    }
+                    player1Turn = false;
                 }
                 else
                 {
-                    Console.Write("\n{0}° Turno, tocca a te! ", nTurno);
-                    int row, col;
-                    bool emptyCell;
-                    Action mossaCorrente;
-                    do
-	                {   
-                        emptyCell=false;
-                        List<Action> legalMoves = new List<Action>();
-                        Console.Write("\nInserire riga (0-1-2): ");
-                        do
-                        {
-                            row = g.ReturnInt();
-                            if (row < 0 || row > 2)
-                            {
-                                Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): ");
-                            }
-	                    } while (row < 0 || row > 2);
-                    
-                        Console.Write("\nInserire colonna (0-1-2): ");
-                        do
-	                    {
-                            col = g.ReturnInt();
-                            if (col < 0 || col > 2)
-                            {
-                                Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): ");
-                            }
-                        } while (col < 0 || col > 2);
-
-                        mossaCorrente = new Action(row,col);
-                        legalMoves = g.GetActions(stato);
-                        
-                        foreach (Action mossaLegale in legalMoves)
-	                    {
-                            if (mossaCorrente.Get_row() == mossaLegale.Get_row() && mossaCorrente.Get_column() == mossaLegale.Get_column())
-                            {
-                                emptyCell=true;
-	                        }
-	                    }
-
-                        if (emptyCell==false)
-                        {
-                            Console.Write("\nERRORE: La cella selezionata e occupata! ");
-                        }
-
-                    } while (emptyCell==false);
-
-                    stato = g.GetResult(stato, mossaCorrente);
-                    currentPlayer = 0;
+                    Console.Write("\n{0}° Turno, tocca al 2° ", nTurno);
+                    if (P2isIA)
+                    {
+                        stato = g.PlayIA(out adversarialSearch, stato, g);
+                    }
+                    else
+                    {
+                        stato = g.PlayUser(stato);
+                    }
+                    player1Turn = true;
                 }
 
 
                 matchInProgress = !(g.IsTerminal(stato)); //Se non è terminale deve continuare
-                //Console.WriteLine(matchInProgress);
             } while (matchInProgress);
             stato.PrintBoard();
+
+            int segnoVincitore = g.IsVictory(stato);
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            if (segnoVincitore == -1)
+            {
+                if (P1isIA && P2isIA)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\n\nLo scontro è stato decisivo, lo stato di equilibrio dell'IA è stato raggiunto");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.WriteLine("Parità");
+                }
+            }
+            else if (segnoVincitore == 0)
+            {
+                if (P1isIA)
+                {
+                    Console.WriteLine("Vince il primo giocatore (IA)!");
+                }
+                else
+                {
+                    Console.WriteLine("Vince il primo giocatore (user)!");
+                }
+            }
+            else if (segnoVincitore == 1)
+            {
+                if (P2isIA)
+                {
+                    Console.WriteLine("Vince il secondo giocatore (IA)!");
+                }
+                else
+                {
+                    Console.WriteLine("Vince il secondo giocatore (user)!");
+                }
+
+            }
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n\nEND");
             Console.ReadKey();
 

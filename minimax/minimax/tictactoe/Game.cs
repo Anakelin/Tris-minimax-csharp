@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using minimax.core.adversarial;
+using minimax.tictactoe;
 
 namespace minimax.tictactoe
 {
@@ -35,10 +36,28 @@ namespace minimax.tictactoe
             return legalMoves;
         }
        
+        public int HowManyPlayers()
+        {
+            bool incorrect = true;
+            Console.ForegroundColor = ConsoleColor.DarkYellow; Console.WriteLine("Quanti utenti giocano?"); Console.ForegroundColor = ConsoleColor.White;
+            do
+            {
+                Console.WriteLine("0 - 1 - 2");
+                int scelta = ReturnInt();
+                switch (scelta)
+                {
+                    case 0: return 0;
+                    case 1: return 1;
+                    case 2: return 2;
+                    default: Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("ERRORE: Dovresti inserire "); Console.ForegroundColor = ConsoleColor.White; break;
+                }
+            } while (incorrect);
+            return 1;
+        }
         public int FirstPlayer()
         {
-            bool loop = true;
-            Console.WriteLine("Chi inizia per primo?");
+            bool incorrect = true;
+            Console.ForegroundColor = ConsoleColor.DarkYellow; Console.WriteLine("Chi inizia per primo?"); Console.ForegroundColor = ConsoleColor.White;
             do
             {
                 Console.WriteLine("0 - IA || 1 - Player");
@@ -47,11 +66,74 @@ namespace minimax.tictactoe
                 {
                     case 0: return 0; 
                     case 1: return 1;
-                    default: Console.Write("ERRORE: Dovresti inserire "); break;
+                    default: Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("ERRORE: Dovresti inserire "); Console.ForegroundColor = ConsoleColor.White; break;
                 }
-            } while (loop);
+            } while (incorrect);
             return State.EMPTY;
         }
+
+        public State PlayIA(out AdversarialSearch<State, Action> adversarialSearch, State stato, Game g)
+        {
+            Console.Write("IA."); Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadKey();
+            adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
+            Action move = adversarialSearch.makeDecision(stato);
+            stato = GetResult(stato, move);
+            return stato;
+        }
+        public State PlayUser(State stato)
+        {
+            Console.Write("giocatore."); Console.ForegroundColor = ConsoleColor.White;
+
+            int row, col;
+            bool emptyCell;
+            Action mossaCorrente;
+            do
+            {
+                emptyCell = false;
+                List<Action> legalMoves = new List<Action>();
+                Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write("\nInserire riga (0-1-2): "); Console.ForegroundColor = ConsoleColor.White;
+                do
+                {
+                    row = ReturnInt();
+                    if (row < 0 || row > 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): "); Console.ForegroundColor = ConsoleColor.White;
+                    }
+                } while (row < 0 || row > 2);
+
+                Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write("Inserire colonna (0-1-2): "); Console.ForegroundColor = ConsoleColor.White;
+                do
+                {
+                    col = ReturnInt();
+                    if (col < 0 || col > 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("\nERRORE: Il numero deve essere 0, 1 o 2): "); Console.ForegroundColor = ConsoleColor.White;
+                    }
+                } while (col < 0 || col > 2);
+
+                mossaCorrente = new Action(row, col);
+                legalMoves = GetActions(stato);
+
+                foreach (Action mossaLegale in legalMoves)
+                {
+                    if (mossaCorrente.Get_row() == mossaLegale.Get_row() && mossaCorrente.Get_column() == mossaLegale.Get_column())
+                    {
+                        emptyCell = true;
+                    }
+                }
+
+                if (emptyCell == false)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("\nERRORE: La cella selezionata e occupata! "); Console.ForegroundColor = ConsoleColor.White;
+                }
+
+            } while (emptyCell == false);
+
+            stato = GetResult(stato, mossaCorrente);
+            return stato;
+        }
+
         public State GetInitialState()  
         {
             State stato = new State();
@@ -88,7 +170,6 @@ namespace minimax.tictactoe
             }
             return newState;
         }
-
 
         public double GetUtility(State state,Player player)
         {
@@ -284,7 +365,7 @@ namespace minimax.tictactoe
                 catch (Exception)
                 {
                     loop = true;
-                    Console.WriteLine("ERRORE: Il numero deve essere intero!");
+                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.WriteLine("ERRORE: Il numero deve essere intero!"); Console.ForegroundColor = ConsoleColor.White;
                 }
             } while (loop);
             return n;
