@@ -59,7 +59,7 @@ namespace minimax.tictactoe
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 if (player1Turn)
                 {
-                    Console.Write("\n{0}° Turno, tocca al 1° ",nTurno);
+                    Console.Write("\n{0}° Turno, tocca al 1° giocatore: ",nTurno);
                     if (P1isIA)
                     {
                         stato = g.PlayIA(out adversarialSearch, stato, g);
@@ -72,7 +72,7 @@ namespace minimax.tictactoe
                 }
                 else
                 {
-                    Console.Write("\n{0}° Turno, tocca al 2° ", nTurno);
+                    Console.Write("\n{0}° Turno, tocca al 2° giocatore: ", nTurno);
                     if (P2isIA)
                     {
                         stato = g.PlayIA(out adversarialSearch, stato, g);

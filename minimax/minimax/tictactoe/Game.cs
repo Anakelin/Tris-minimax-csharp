@@ -74,7 +74,7 @@ namespace minimax.tictactoe
 
         public State PlayIA(out AdversarialSearch<State, Action> adversarialSearch, State stato, Game g)
         {
-            Console.Write("IA."); Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkBlue; Console.Write("IA."); Console.ForegroundColor = ConsoleColor.White;
             Console.ReadKey();
             adversarialSearch = new MinimaxSearch<State, Action, Player>(g);
             Action move = adversarialSearch.makeDecision(stato);
@@ -83,7 +83,8 @@ namespace minimax.tictactoe
         }
         public State PlayUser(State stato)
         {
-            Console.Write("giocatore."); Console.ForegroundColor = ConsoleColor.White;
+
+            Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.Write("Utente."); Console.ForegroundColor = ConsoleColor.White;
 
             int row, col;
             bool emptyCell;
