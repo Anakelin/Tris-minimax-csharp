@@ -352,6 +352,43 @@ namespace minimax.tictactoe
             return State.EMPTY;
         }
 
+        public void MsgWinner(int segnoVincitore, bool P1isIA, bool P2isIA)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            if (segnoVincitore == -1)
+            {
+                if (P1isIA && P2isIA)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\n\nLo scontro è stato decisivo, lo stato di equilibrio dell'IA è stato raggiunto!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.WriteLine("Parità");
+                }
+            }
+            else if (segnoVincitore == 0)
+            {
+                if (P1isIA)
+                {
+                    Console.WriteLine("Vince il primo giocatore (IA)!");
+                }
+                else
+                {
+                    Console.WriteLine("Vince il primo giocatore (user)!");
+                }
+            }
+            else if (segnoVincitore == 1)
+            {
+                if (P2isIA)
+                {
+                    Console.WriteLine("Vince il secondo giocatore (IA)!");
+                }
+                else
+                {
+                    Console.WriteLine("Vince il secondo giocatore (user)!");
+                }
+            }
+        }
         public int ReturnInt()
         {
             int n = State.EMPTY;

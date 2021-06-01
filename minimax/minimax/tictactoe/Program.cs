@@ -13,18 +13,10 @@ namespace minimax.tictactoe
 
         static void Main(string[] args)
         {
-            /*
-            int[,] board = new int[,] {
-            {-1,-1,-1 },
-            {-1,1,-1 },
-            {-1,-1,-1 }
-            };
-            */
             Game g = new Game();
             State stato = g.GetInitialState();
             int[,] board = stato.Get_board();
             int turnPlayer = (int)stato.Get_currentPlayer();
-            //State stato = new State(board,Player.Cross);
             bool matchInProgress = true;
 
             int howManyPlayers = g.HowManyPlayers();
@@ -33,8 +25,9 @@ namespace minimax.tictactoe
             switch (howManyPlayers)
             {
                 case 0: break;
-                case 1: int FirstPlayer = g.FirstPlayer();
-                    if (FirstPlayer==0)
+                case 1:
+                    int FirstPlayer = g.FirstPlayer();
+                    if (FirstPlayer == 0)
                     {
                         P2isIA = false;
                     }
@@ -46,7 +39,7 @@ namespace minimax.tictactoe
                 case 2: P1isIA = false; P2isIA = false; break;
                 default: Console.ForegroundColor = ConsoleColor.DarkGray; Console.WriteLine("ERRORE SOVRANNATURALE: Nessuna casistica dovrebbe portarti qui... se viene dato questo messaggio non ci possiamo + fidare di C#"); break;
             }
-            
+
             AdversarialSearch<State, Action> adversarialSearch;
             int nTurno = 0;
             bool player1Turn = true;
@@ -59,7 +52,7 @@ namespace minimax.tictactoe
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 if (player1Turn)
                 {
-                    Console.Write("\n{0}° Turno, tocca al 1° giocatore: ",nTurno);
+                    Console.Write("\n{0}° Turno, tocca al 1° giocatore: ", nTurno);
                     if (P1isIA)
                     {
                         stato = g.PlayIA(out adversarialSearch, stato, g);
@@ -90,47 +83,14 @@ namespace minimax.tictactoe
             stato.PrintBoard();
 
             int segnoVincitore = g.IsVictory(stato);
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            if (segnoVincitore == -1)
-            {
-                if (P1isIA && P2isIA)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\n\nLo scontro è stato decisivo, lo stato di equilibrio dell'IA è stato raggiunto");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.WriteLine("Parità");
-                }
-            }
-            else if (segnoVincitore == 0)
-            {
-                if (P1isIA)
-                {
-                    Console.WriteLine("Vince il primo giocatore (IA)!");
-                }
-                else
-                {
-                    Console.WriteLine("Vince il primo giocatore (user)!");
-                }
-            }
-            else if (segnoVincitore == 1)
-            {
-                if (P2isIA)
-                {
-                    Console.WriteLine("Vince il secondo giocatore (IA)!");
-                }
-                else
-                {
-                    Console.WriteLine("Vince il secondo giocatore (user)!");
-                }
-
-            }
+            g.MsgWinner(segnoVincitore,P1isIA,P2isIA);
+            
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n\nEND");
             Console.ReadKey();
 
-
+            {
             /*
             // Test printBoard Ok
             State stato = new State();
@@ -220,7 +180,7 @@ namespace minimax.tictactoe
             stato.PrintBoard();
             Console.WriteLine(g.IsTerminal(stato));
             */
-
+            }
         }
     }
 }
